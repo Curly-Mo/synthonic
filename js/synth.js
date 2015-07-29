@@ -21,7 +21,6 @@ for(var i=0; i<20; i++) {
 
 	envelope = new Envelope(attack_env, release_env, attack_time, release_time);
 	envelopes[i] = envelope;
-
 }
 
 function frequencyFromNoteNumber( note ) {
@@ -51,8 +50,8 @@ function noteOff( note ) {
 }
 
 function Envelope(attack, release, attackTime, releaseTime){
-	this.attack_envelope = attack;
-	this.release_envelope = release;
+	this.attack_env = attack;
+	this.release_env = release;
 	this.attack_time = attackTime;
 	this.release_time = releaseTime
 }
@@ -71,9 +70,10 @@ function Voice(note, velocity) {
 		//envelope stuff
 		env = audioContext.createGain();
 		env.gain.setValueAtTime(0, now);
-		envelope = envelopes[i].attack_envelope;
+		envelope = envelopes[i].attack_env;
 		for(var e=0; e<envelope.length; e++) {
 			time = (envelopes[i].attack_time) * e/(envelope.length-1);
+			console.log(envelope[e]);
 			env.gain.linearRampToValueAtTime(envelope[e], now + time);
 		}
 
@@ -86,7 +86,7 @@ function Voice(note, velocity) {
 	}
 
 	this.postGain.connect(output);
-	this.postGain.gain.value = velocity * (1 / this.num_harmonics);
+	this.postGain.gain.value = velocity;// * (1 / this.num_harmonics);
 }
 
 Voice.prototype.noteOff = function() {
@@ -98,14 +98,65 @@ Voice.prototype.noteOff = function() {
 		env = this.gain_envs[i];
 		env.gain.cancelScheduledValues(now);
 		// In case still in attack envelope, scale all values to start at current.
-		factor = env.gain.value.toFixed(6) / envelopes[i].release_envelope[0].toFixed(6);
-		envelope = envelopes[i].release_envelope;
+		factor = env.gain.value.toFixed(6) / envelopes[i].release_env[0].toFixed(6);
+		if(isNaN(factor)){factor=1;}
+		envelope = envelopes[i].release_env;
 		for(var e=0; e<envelope.length; e++) {
 			time = (envelopes[i].release_time) * e/(envelope.length-1);
 			env.gain.linearRampToValueAtTime(envelope[e]*factor, now + time);
 		}
 		osc.stop(now + parseFloat(time)*2);
 	}
+}
+
+function initEnvelopes(){
+	// forms = document.getElementsByClassName('harmonic_settings');
+	// for (form in forms) {
+	//
+	// }
+	envelope = new Envelope([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9], [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0], 1, 1);
+	envelopes[0] = envelope;
+	for(var i=1; i<20; i++) {
+		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 1, 1);
+		envelopes[i] = envelope;
+	}
+}
+
+function initUI(){
+	initEnvelopes();
+	form = document.getElementById('f0');
+	form.addEventListener('input', function(e) {
+		harmonic = parseInt(this.id.substring(1));
+		name = e.target.name;
+		value = parseFloat(e.target.value);
+
+		if (name=='attack9'){
+			release_start = e.target.parentNode.parentNode.parentNode.lastElementChild.firstElementChild.nextElementSibling.firstElementChild;
+			release_start.value = value;
+			envelopes[harmonic].release_env[0] = value;
+			spacer = document.getElementById('sustain-spacer');
+			spacer.style.height = 116 - (116*value) + 'px';
+		}
+		if (name=='release0'){
+			attack_end = form.firstElementChild.firstElementChild.nextElementSibling.lastElementChild
+			attack_end.value = value;
+			envelopes[harmonic].attack_env[9] = value;
+			spacer = document.getElementById('sustain-spacer');
+			spacer.style.height = 116 - (116*value) + 'px';
+		}
+
+		if (name=='attack_time'){
+			envelopes[harmonic].attack_time = value;
+		}else if (name=='release_time'){
+			envelopes[harmonic].release_time = value;
+		}else if(name.slice(0,-1)=='attack'){
+			num = name.slice(-1);
+			envelopes[harmonic].attack_env[num] = value;
+		}else if(name.slice(0,-1)=='release'){
+			num = name.slice(-1);
+			envelopes[harmonic].release_env[num] = value;
+		}
+	});
 }
 
 function initSynth() {
@@ -119,6 +170,8 @@ function initSynth() {
   	}
 	output = audioContext.createGain();
 	output.connect(audioContext.destination);
+
+	initUI();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
