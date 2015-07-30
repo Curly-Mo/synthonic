@@ -2,6 +2,8 @@
 <html>
     <head>
         <link rel='stylesheet' href='css/main.css'>
+        <link rel='stylesheet' href='css/slider.css'>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
         <script src='js/audio_graphs.js'></script>
         <script src='js/synth.js'></script>
         <script src='js/midi.js'></script>
@@ -16,16 +18,16 @@
                         <div style='width:35%;'>
                             <div class='envelope_label'>Attack Envelope</div>
                             <div class='envelope'>
-                                <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled class='vertical' orient='vertical'>
-                                <input name='attack1' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack2' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack3' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack4' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack5' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack6' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack7' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack8' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='attack9' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
+                                <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                <input name='attack9' type='range' min='0' max='1' step='0.01'>
                             </div>
                             <div class='start_time'>
                                 <input name='attack_start' type='text' value='0' disabled></input>s
@@ -42,16 +44,16 @@
                         <div style='width:35%;'>
                             <div class='envelope_label'>Release Envelope</div>
                             <div class='envelope'>
-                                <input name='release0' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release1' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release2' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release3' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release4' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release5' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release6' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release7' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release8' type='range' min='0' max='1' step='0.01' class='vertical' orient='vertical'>
-                                <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled class='vertical' orient='vertical'>
+                                <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
                             </div>
                             <div class='start_time'>
                                 <input name='release_start' type='text' value='0' disabled></input>s

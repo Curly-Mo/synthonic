@@ -73,7 +73,6 @@ function Voice(note, velocity) {
 		envelope = envelopes[i].attack_env;
 		for(var e=0; e<envelope.length; e++) {
 			time = (envelopes[i].attack_time) * e/(envelope.length-1);
-			console.log(envelope[e]);
 			env.gain.linearRampToValueAtTime(envelope[e], now + time);
 		}
 
@@ -122,27 +121,69 @@ function initEnvelopes(){
 	}
 }
 
+
+function updateCSS(selector, property, value){
+	var sheets = document.styleSheets;
+	for (var s=0; s<sheets.length; s++){
+		var rules = sheets[s].cssRules;
+		for (var r=0; r<rules.length; r++){
+			var rule = rules[r];
+			if (selector == rule.selectorText){
+				var pattern = new RegExp(property+'(.*);', 'gm');
+				console.log(rule.cssText);
+				if (rule.cssText.match(pattern)){
+					newrule = rule.cssText.replace(pattern, property+': "'+ value+'";');
+					sheets[s].deleteRule(r);
+					sheets[s].insertRule(newrule, r);
+					return;
+				}
+			}
+		}
+	}
+}
+
 function initUI(){
 	initEnvelopes();
 	form = document.getElementById('f0');
+	// form.addEventListener('mousedown', function(e) {
+	// 	console.log('what?');
+	// 	e.preventDefault();
+	// });
+	// form.addEventListener('mousemove', function(e) {
+	// 	console.log(e.target.name);
+	// 	e.target.change();
+	// });
+	// form.addEventListener('mouseout', function(e) {
+	// 	console.log('out');
+	// 	e.target.blur();
+	// });
+
 	form.addEventListener('input', function(e) {
+    	//elementMouseIsOver = document.elementFromPoint(e.clientX, e.clientY);
+		//console.log(e);
+		//e.preventDefault();
+		//console.log(elementMouseIsOver);
 		harmonic = parseInt(this.id.substring(1));
 		name = e.target.name;
 		value = parseFloat(e.target.value);
+		e.target.setAttribute('data-content', value);
+		updateCSS('input[type="range"]:focus::-webkit-slider-thumb::after', 'content', value);
+		// document.styleSheets[0].insertRule(
+		// 	'input[type=range]:focus::-webkit-slider-thumb:after { content:"' + value + '"; }', 0 );
 
 		if (name=='attack9'){
 			release_start = e.target.parentNode.parentNode.parentNode.lastElementChild.firstElementChild.nextElementSibling.firstElementChild;
 			release_start.value = value;
 			envelopes[harmonic].release_env[0] = value;
 			spacer = document.getElementById('sustain-spacer');
-			spacer.style.height = 116 - (116*value) + 'px';
+			spacer.style.height = 88 - (88*value) + 'px';
 		}
 		if (name=='release0'){
 			attack_end = form.firstElementChild.firstElementChild.nextElementSibling.lastElementChild
 			attack_end.value = value;
 			envelopes[harmonic].attack_env[9] = value;
 			spacer = document.getElementById('sustain-spacer');
-			spacer.style.height = 116 - (116*value) + 'px';
+			spacer.style.height = 88 - (88*value) + 'px';
 		}
 
 		if (name=='attack_time'){

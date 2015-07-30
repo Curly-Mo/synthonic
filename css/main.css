@@ -195,11 +195,6 @@ canvas{
 }
 
 
-input.vertical {
-  -webkit-appearance: slider-vertical;
-  writing-mode: bt-lr;
-  width: 3px;
-}
 
 
 .start_time{
@@ -208,7 +203,7 @@ input.vertical {
 }
 .start_time input{
     border-radius: 5px;
-    width: 8px;
+    width: 10px;
     background: #DCDAD1;
 }
 .end_time {
@@ -222,17 +217,13 @@ input.vertical {
 
 .sustain-line {
     height: 3px; /* Line width of 3 */
-    background: #DCDAD1;
+    background: #fff;
     border-radius: 5px;
-    margin: 8px 5px 8px 5px;
+    margin: 4.5px 5px 4.5px 3px;
 }
-/*.sustain-line::before {
-    content: "";
-    display: block;
-    margin: 50%;
-}*/
+
 #sustain-spacer {
-    height:58px;
+    height:44px;
 }
 
 .harmonic_settings{
@@ -246,6 +237,7 @@ input.vertical {
     justify-content:
     space-between;
     width:100%;
+    height:105px;
 }
 
 .envelope_label{
