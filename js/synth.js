@@ -85,7 +85,7 @@ function Voice(note, velocity) {
 	}
 
 	this.postGain.connect(output);
-	this.postGain.gain.value = velocity;// * (1 / this.num_harmonics);
+	this.postGain.gain.value = velocity * (1 / this.num_harmonics);
 }
 
 Voice.prototype.noteOff = function() {
@@ -130,7 +130,6 @@ function updateCSS(selector, property, value){
 			var rule = rules[r];
 			if (selector == rule.selectorText){
 				var pattern = new RegExp(property+'(.*);', 'gm');
-				console.log(rule.cssText);
 				if (rule.cssText.match(pattern)){
 					newrule = rule.cssText.replace(pattern, property+': "'+ value+'";');
 					sheets[s].deleteRule(r);
@@ -142,62 +141,46 @@ function updateCSS(selector, property, value){
 	}
 }
 
+function inputChange(e){
+	harmonic = parseInt(this.id.substring(1));
+	name = e.target.name;
+	value = parseFloat(e.target.value);
+	updateCSS('input[type="range"]:focus::-webkit-slider-thumb::after', 'content', value);
+
+	if (name=='attack9'){
+		release_start = this.getElementsByClassName('envelope')[1].firstElementChild;
+		release_start.value = value;
+		envelopes[harmonic].release_env[0] = value;
+		spacer = this.getElementsByClassName('sustain-spacer')[0];
+		spacer.style.height = 88 - (88*value) + 'px';
+	}
+	if (name=='release0'){
+		attack_end = this.getElementsByClassName('envelope')[0].lastElementChild
+		attack_end.value = value;
+		envelopes[harmonic].attack_env[9] = value;
+		spacer = this.getElementsByClassName('sustain-spacer')[0];
+		spacer.style.height = 88 - (88*value) + 'px';
+	}
+
+	if (name=='attack_time'){
+		envelopes[harmonic].attack_time = value;
+	}else if (name=='release_time'){
+		envelopes[harmonic].release_time = value;
+	}else if(name.slice(0,-1)=='attack'){
+		num = name.slice(-1);
+		envelopes[harmonic].attack_env[num] = value;
+	}else if(name.slice(0,-1)=='release'){
+		num = name.slice(-1);
+		envelopes[harmonic].release_env[num] = value;
+	}
+}
+
 function initUI(){
 	initEnvelopes();
-	form = document.getElementById('f0');
-	// form.addEventListener('mousedown', function(e) {
-	// 	console.log('what?');
-	// 	e.preventDefault();
-	// });
-	// form.addEventListener('mousemove', function(e) {
-	// 	console.log(e.target.name);
-	// 	e.target.change();
-	// });
-	// form.addEventListener('mouseout', function(e) {
-	// 	console.log('out');
-	// 	e.target.blur();
-	// });
-
-	form.addEventListener('input', function(e) {
-    	//elementMouseIsOver = document.elementFromPoint(e.clientX, e.clientY);
-		//console.log(e);
-		//e.preventDefault();
-		//console.log(elementMouseIsOver);
-		harmonic = parseInt(this.id.substring(1));
-		name = e.target.name;
-		value = parseFloat(e.target.value);
-		e.target.setAttribute('data-content', value);
-		updateCSS('input[type="range"]:focus::-webkit-slider-thumb::after', 'content', value);
-		// document.styleSheets[0].insertRule(
-		// 	'input[type=range]:focus::-webkit-slider-thumb:after { content:"' + value + '"; }', 0 );
-
-		if (name=='attack9'){
-			release_start = e.target.parentNode.parentNode.parentNode.lastElementChild.firstElementChild.nextElementSibling.firstElementChild;
-			release_start.value = value;
-			envelopes[harmonic].release_env[0] = value;
-			spacer = document.getElementById('sustain-spacer');
-			spacer.style.height = 88 - (88*value) + 'px';
-		}
-		if (name=='release0'){
-			attack_end = form.firstElementChild.firstElementChild.nextElementSibling.lastElementChild
-			attack_end.value = value;
-			envelopes[harmonic].attack_env[9] = value;
-			spacer = document.getElementById('sustain-spacer');
-			spacer.style.height = 88 - (88*value) + 'px';
-		}
-
-		if (name=='attack_time'){
-			envelopes[harmonic].attack_time = value;
-		}else if (name=='release_time'){
-			envelopes[harmonic].release_time = value;
-		}else if(name.slice(0,-1)=='attack'){
-			num = name.slice(-1);
-			envelopes[harmonic].attack_env[num] = value;
-		}else if(name.slice(0,-1)=='release'){
-			num = name.slice(-1);
-			envelopes[harmonic].release_env[num] = value;
-		}
-	});
+	forms = document.getElementsByClassName('harmonic_settings');
+	for (i=0;i<forms.length;i++){
+		forms[i].addEventListener('input', inputChange);
+	}
 }
 
 function initSynth() {

@@ -38,7 +38,7 @@ input[type=range]::-webkit-slider-thumb:before {
 input[type=range]:focus::-webkit-slider-thumb:after {
     position: absolute;
     top: 3px;
-    left: 150%;
+    left: 130%;
     transform: rotate(90deg);
     /*transform-origin: 100% 100%;*/
     border-radius: 25%;
