@@ -1,8 +1,7 @@
-var audioContext = null;
+var audioContext;
 var voices = new Array();
 var output;
-var envelopes = new Array(20);
-var attack_envelopes =  new Array();
+var envelopes = new Array(30);
 var presets = {};
 
 function frequencyFromNoteNumber( note ) {
@@ -81,15 +80,15 @@ Voice.prototype.noteOff = function() {
 	console.log("noteoff: now: " + now);
 
 	for(var i=0; i<this.num_harmonics; i++) {
-		osc = this.oscillators[i];
-		env = this.gain_envs[i];
+		var osc = this.oscillators[i];
+		var env = this.gain_envs[i];
 		env.gain.cancelScheduledValues(now);
 		// In case still in attack envelope, scale all values to start at current.
-		factor = env.gain.value.toFixed(6) / envelopes[i].release_env[0].toFixed(6);
+		var factor = env.gain.value.toFixed(6) / envelopes[i].release_env[0].toFixed(6);
 		if(!isFinite(factor)){factor=1;}
-		envelope = envelopes[i].release_env;
+		var envelope = envelopes[i].release_env;
 		for(var e=0; e<envelope.length; e++) {
-			time = (envelopes[i].release_time) * e/(envelope.length-1);
+			var time = (envelopes[i].release_time) * e/(envelope.length-1);
 			env.gain.linearRampToValueAtTime(envelope[e]*factor, now + time);
 		}
 		osc.stop(now + parseFloat(time)*2);
@@ -108,10 +107,10 @@ function sinePreset(){
 }
 
 function squarePreset(){
-	square_envelopes = new Array(envelopes.length);
+	var square_envelopes = new Array(envelopes.length);
 	for (var k=0; k<square_envelopes.length; k+=2) {
-		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
-		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		var attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		var release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
 		for (var i=0;i<attack.length;i++){
 			attack[i] = attack[i] * 1/(k+1);
 			release[i] = release[i] * 1/(k+1);
@@ -120,17 +119,17 @@ function squarePreset(){
 		square_envelopes[k] = envelope;
 	}
 	for (var k=1; k<square_envelopes.length; k+=2) {
-		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
+		var envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
 		square_envelopes[k] = envelope;
 	}
 	return square_envelopes;
 }
 
 function trianglePreset(){
-	triangle_envelopes = new Array(envelopes.length);
+	var triangle_envelopes = new Array(envelopes.length);
 	for (var k=0; k<triangle_envelopes.length; k+=2) {
-		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
-		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		var attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		var release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
 		for (var i=0;i<attack.length;i++){
 			attack[i] = attack[i] * 1/(Math.pow(k+1,2));
 			release[i] = release[i] * 1/(Math.pow(k+1,2));
@@ -139,17 +138,17 @@ function trianglePreset(){
 		triangle_envelopes[k] = envelope;
 	}
 	for (var k=1; k<triangle_envelopes.length; k+=2) {
-		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
+		var envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
 		triangle_envelopes[k] = envelope;
 	}
 	return triangle_envelopes;
 }
 
 function sawtoothPreset(){
-	sawtooth_envelopes = new Array(envelopes.length);
+	var sawtooth_envelopes = new Array(envelopes.length);
 	for (var k=0; k<sawtooth_envelopes.length; k++) {
-		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
-		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		var attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		var release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
 		for (var i=0;i<attack.length;i++){
 			attack[i] = attack[i] * 1/(k+1);
 			release[i] = release[i] * 1/(k+1);
@@ -169,7 +168,7 @@ function initPresets(){
 	//Load saved presets
 	for (var i=0;i<localStorage.length;i++) {
 		var key = localStorage.key(i);
-  		console.log('Custom preset: ' + key);
+  		console.log('Loading custom preset: ' + key);
 		presets[key] = JSON.parse(localStorage.getItem(key));
 	}
 
@@ -182,7 +181,7 @@ function initPresets(){
 		select.add(opt);
 	}
 	select.addEventListener('change', function(e){
-		envelopes = presets[e.target.value];
+		envelopes = presets[e.target.value].slice();
 		updateEnvelopeUI();
 	});
 }
@@ -214,6 +213,7 @@ function savePreset(e){
 	select.add(opt);
 	select.options.selectedIndex = select.options.length - 1;
 	save_button.style.display = 'none';
+	presets[name] = envelopes.slice();
 
 	return false;
 }
@@ -352,7 +352,7 @@ function initSynth() {
 	output.connect(audioContext.destination);
 
 	initPresets();
-	envelopes = presets['sine'];
+	envelopes = presets['sine'].slice();
 	initUI();
 }
 
