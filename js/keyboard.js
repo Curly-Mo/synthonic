@@ -136,10 +136,11 @@ function touchcancel( ev ) {
 }
 
 function pointerDown( ev ) {
+	console.log(ev);
 	var note = parseInt( ev.target.id.substring( 1 ) );
-	if (pointerDebugging)
-		console.log( "pointer down: id: " + ev.pointerId
-			+ " target: " + ev.target.id + " note:" + note );
+	//if (pointerDebugging)
+	//	console.log( "pointer down: id: " + ev.pointerId
+	//		+ " target: " + ev.target.id + " note:" + note );
 	if (!isNaN(note)) {
 		noteOn( note + 12*(3-currentOctave), 0.75 );
 		var keybox = document.getElementById("keybox")
@@ -150,9 +151,9 @@ function pointerDown( ev ) {
 
 function pointerMove( ev ) {
 	var note = parseInt( ev.target.id.substring( 1 ) );
-	if (pointerDebugging)
-		console.log( "pointer move: id: " + ev.pointerId
-			+ " target: " + ev.target.id + " note:" + note );
+	//if (pointerDebugging)
+	//	console.log( "pointer move: id: " + ev.pointerId
+	//		+ " target: " + ev.target.id + " note:" + note );
 	if (!isNaN(note) && pointers[ev.pointerId] && pointers[ev.pointerId]!=note) {
 		if (pointers[ev.pointerId])
 			noteOff(pointers[ev.pointerId] + 12*(3-currentOctave));
@@ -164,8 +165,8 @@ function pointerMove( ev ) {
 
 function pointerUp( ev ) {
 	var note = parseInt( ev.target.id.substring( 1 ) );
-	if (pointerDebugging)
-		console.log( "pointer up: id: " + ev.pointerId + " note:" + note );
+	//if (pointerDebugging)
+	//	console.log( "pointer up: id: " + ev.pointerId + " note:" + note );
 	if (note != NaN)
 		noteOff( note + 12*(3-currentOctave) );
 	pointers[ev.pointerId]=null;
@@ -176,15 +177,10 @@ function pointerUp( ev ) {
 function initKeyboard(){
   keybox = document.getElementById("keybox");
 
-  /*if (window.location.search.substring(1) == "touch") {
-    keybox.addEventListener('touchstart', touchstart);
-    keybox.addEventListener('touchmove', touchmove);
-    keybox.addEventListener('touchend', touchend);
-  } else {*/
-    keybox.addEventListener('down', pointerDown);
-    keybox.addEventListener('track', pointerMove);
-    keybox.addEventListener('up', pointerUp);
-  //}
+  keybox.addEventListener('mousedown', pointerDown);
+  keybox.addEventListener('mousemove', pointerMove);
+  keybox.addEventListener('mouseup', pointerUp);
+
   window.addEventListener('keydown', keyDown, false);
   window.addEventListener('keyup', keyUp, false);
 }

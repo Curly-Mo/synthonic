@@ -1,27 +1,9 @@
 var audioContext = null;
 var voices = new Array();
 var output;
-var envelopes = new Array();
+var envelopes = new Array(20);
 var attack_envelopes =  new Array();
-
-for(var i=0; i<20; i++) {
-	var attack_env = new Array();
-	var release_env = new Array();
-	var attack_time = 1;
-	var release_time = 0.5;
-	attack_env[0] = 0.0;
-	for(var k=1; k<10; k++){
-		attack_env[k] = Math.random();
-	}
-	release_env[0] = attack_env[9];
-	for(var k=1; k<9; k++){
-		release_env[k] = Math.random();
-	}
-	release_env[9] = 0.0;
-
-	envelope = new Envelope(attack_env, release_env, attack_time, release_time);
-	envelopes[i] = envelope;
-}
+var presets = {};
 
 function frequencyFromNoteNumber( note ) {
 	return 440 * Math.pow(2,(note-69)/12);
@@ -57,24 +39,30 @@ function Envelope(attack, release, attackTime, releaseTime){
 }
 
 function Voice(note, velocity) {
-	this.num_harmonics = 20;
+	this.num_harmonics = envelopes.length;
 	this.frequency = frequencyFromNoteNumber(note);
 	this.postGain = audioContext.createGain();
 	this.oscillators = new Array();
 	this.gain_envs = new Array();
+	this.max_volume = 0;
 
 	now = audioContext.currentTime;
 	for(var i=0; i<this.num_harmonics; i++) {
 		var osc = audioContext.createOscillator();
 		osc.frequency.value = this.frequency * (i+1);
 		//envelope stuff
-		env = audioContext.createGain();
+		var env = audioContext.createGain();
 		env.gain.setValueAtTime(0, now);
-		envelope = envelopes[i].attack_env;
+		var envelope = envelopes[i].attack_env;
+		var max = 0;
 		for(var e=0; e<envelope.length; e++) {
 			time = (envelopes[i].attack_time) * e/(envelope.length-1);
 			env.gain.linearRampToValueAtTime(envelope[e], now + time);
+			if (envelope[e] > max){
+				max = envelope[e];
+			}
 		}
+		this.max_volume += max;
 
 		osc.connect(env);
 		env.connect(this.postGain);
@@ -85,7 +73,7 @@ function Voice(note, velocity) {
 	}
 
 	this.postGain.connect(output);
-	this.postGain.gain.value = velocity * (1 / this.num_harmonics);
+	this.postGain.gain.value = velocity * (1 / this.max_volume);
 }
 
 Voice.prototype.noteOff = function() {
@@ -98,7 +86,7 @@ Voice.prototype.noteOff = function() {
 		env.gain.cancelScheduledValues(now);
 		// In case still in attack envelope, scale all values to start at current.
 		factor = env.gain.value.toFixed(6) / envelopes[i].release_env[0].toFixed(6);
-		if(isNaN(factor)){factor=1;}
+		if(!isFinite(factor)){factor=1;}
 		envelope = envelopes[i].release_env;
 		for(var e=0; e<envelope.length; e++) {
 			time = (envelopes[i].release_time) * e/(envelope.length-1);
@@ -108,19 +96,169 @@ Voice.prototype.noteOff = function() {
 	}
 }
 
-function initEnvelopes(){
-	// forms = document.getElementsByClassName('harmonic_settings');
-	// for (form in forms) {
-	//
-	// }
-	envelope = new Envelope([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9], [0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0], 1, 1);
-	envelopes[0] = envelope;
-	for(var i=1; i<20; i++) {
-		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 1, 1);
-		envelopes[i] = envelope;
+function sinePreset(){
+	var sine_envelopes = new Array(envelopes.length);
+	var envelope = new Envelope([0,.025,.05,.1,.2,.4,.8,1,1,1], [1,1,1,.8,.4,.2,.1,.05,.025,0], 0.1, 0.1);
+	sine_envelopes[0] = envelope;
+	for (var k=1; k<sine_envelopes.length; k++) {
+		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
+		sine_envelopes[k] = envelope;
+	}
+	return sine_envelopes;
+}
+
+function squarePreset(){
+	square_envelopes = new Array(envelopes.length);
+	for (var k=0; k<square_envelopes.length; k+=2) {
+		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		for (var i=0;i<attack.length;i++){
+			attack[i] = attack[i] * 1/(k+1);
+			release[i] = release[i] * 1/(k+1);
+		}
+		var envelope = new Envelope(attack, release, 0.1, 0.1);
+		square_envelopes[k] = envelope;
+	}
+	for (var k=1; k<square_envelopes.length; k+=2) {
+		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
+		square_envelopes[k] = envelope;
+	}
+	return square_envelopes;
+}
+
+function trianglePreset(){
+	triangle_envelopes = new Array(envelopes.length);
+	for (var k=0; k<triangle_envelopes.length; k+=2) {
+		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		for (var i=0;i<attack.length;i++){
+			attack[i] = attack[i] * 1/(Math.pow(k+1,2));
+			release[i] = release[i] * 1/(Math.pow(k+1,2));
+		}
+		var envelope = new Envelope(attack, release, 0.1, 0.1);
+		triangle_envelopes[k] = envelope;
+	}
+	for (var k=1; k<triangle_envelopes.length; k+=2) {
+		envelope = new Envelope([0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], 0.1, 0.1);
+		triangle_envelopes[k] = envelope;
+	}
+	return triangle_envelopes;
+}
+
+function sawtoothPreset(){
+	sawtooth_envelopes = new Array(envelopes.length);
+	for (var k=0; k<sawtooth_envelopes.length; k++) {
+		attack = [0,.025,.05,.1,.2,.4,.8,1,1,1];
+		release = [1,1,1,.8,.4,.2,.1,.05,.025,0];
+		for (var i=0;i<attack.length;i++){
+			attack[i] = attack[i] * 1/(k+1);
+			release[i] = release[i] * 1/(k+1);
+		}
+		var envelope = new Envelope(attack, release, 0.1, 0.1);
+		sawtooth_envelopes[k] = envelope;
+	}
+	return sawtooth_envelopes;
+}
+
+function initPresets(){
+	presets['sine'] = sinePreset();
+	presets['square'] = squarePreset();
+	presets['sawtooth'] = sawtoothPreset();
+	presets['triangle'] = trianglePreset();
+
+	//Load saved presets
+	for (var i=0;i<localStorage.length;i++) {
+		var key = localStorage.key(i);
+  		console.log('Custom preset: ' + key);
+		presets[key] = JSON.parse(localStorage.getItem(key));
+	}
+
+	// Add presets to dropdown
+	var select = document.getElementById('preset');
+	for (key in presets) {
+		var opt = document.createElement("option");
+		opt.text = key;
+		opt.value = key;
+		select.add(opt);
+	}
+	select.addEventListener('change', function(e){
+		envelopes = presets[e.target.value];
+		updateEnvelopeUI();
+	});
+}
+
+function savePreset(e){
+	e.preventDefault();
+	var save_button = document.getElementById('save');
+	if (save_button.style.display == 'none') {
+		return false;
+	}
+	var name = prompt("Save Instrument as:");
+	if(name==null||name==''){
+		return false;
+	}
+	localStorage.setItem(name, JSON.stringify(envelopes));
+
+	// Add preset to dropdown
+	var select = document.getElementById('preset');
+	var opt = document.createElement("option");
+	for (var i=0;i<select.options.length;i++) {
+		if(select.options[i].value == name){
+			select.options.selectedIndex = i;
+			save_button.style.display = 'none';
+			return false;
+		}
+	}
+	opt.text = name;
+	opt.value = name;
+	select.add(opt);
+	select.options.selectedIndex = select.options.length - 1;
+	save_button.style.display = 'none';
+
+	return false;
+}
+
+function updateEnvelopeUI(){
+	var forms = document.getElementsByClassName('harmonic_settings');
+	for(var i=0; i<envelopes.length; i++) {
+		var envs = forms[i].getElementsByClassName('envelope');
+		var attacks = envs[0].getElementsByTagName('input');
+		var releases = envs[1].getElementsByTagName('input');
+		for (var j=0;j<attacks.length;j++){
+			attacks[j].value = envelopes[i].attack_env[j];
+			change(forms[i], attacks[j]);
+		}
+		for (var j=0;j<releases.length;j++){
+			releases[j].value = envelopes[i].release_env[j];
+			change(forms[i], releases[j]);
+		}
+		var attack_env = forms[i].getElementsByClassName('end_time')[0].getElementsByTagName('input')[0];
+		var release_env = forms[i].getElementsByClassName('end_time')[1].getElementsByTagName('input')[0];
+		attack_env.value = envelopes[i].attack_time;
+		release_env.value = envelopes[i].release_time;
 	}
 }
 
+function show_harmonics(e){
+	var siblings = e.target.parentNode.children;
+	for (var i=0;i<siblings.length;i++) {
+		siblings[i].className = siblings[i].className.replace('current', '');
+	}
+	e.target.className = (e.target.className + ' current').trim();
+
+	var values = e.target.innerText.split('-');
+	var start = values[0];
+	var end = values[1];
+
+	var harmonics = document.getElementsByClassName('harmonic_settings');
+	for (var i=0;i<harmonics.length;i++) {
+		if (i >= start && i <= end){
+			harmonics[i].style.display = 'block';
+		}else{
+			harmonics[i].style.display = 'none';
+		}
+	}
+}
 
 function updateCSS(selector, property, value){
 	var sheets = document.styleSheets;
@@ -141,24 +279,23 @@ function updateCSS(selector, property, value){
 	}
 }
 
-function inputChange(e){
-	harmonic = parseInt(this.id.substring(1));
-	name = e.target.name;
-	value = parseFloat(e.target.value);
-	updateCSS('input[type="range"]:focus::-webkit-slider-thumb::after', 'content', value);
+function change(form, e){
+	var harmonic = form.id.substring(1);
+	var name = e.name;
+	var value = parseFloat(e.value);
 
 	if (name=='attack9'){
-		release_start = this.getElementsByClassName('envelope')[1].firstElementChild;
+		release_start = form.getElementsByClassName('envelope')[1].firstElementChild;
 		release_start.value = value;
 		envelopes[harmonic].release_env[0] = value;
-		spacer = this.getElementsByClassName('sustain-spacer')[0];
+		spacer = form.getElementsByClassName('sustain-spacer')[0];
 		spacer.style.height = 88 - (88*value) + 'px';
 	}
 	if (name=='release0'){
-		attack_end = this.getElementsByClassName('envelope')[0].lastElementChild
+		attack_end = form.getElementsByClassName('envelope')[0].lastElementChild
 		attack_end.value = value;
 		envelopes[harmonic].attack_env[9] = value;
-		spacer = this.getElementsByClassName('sustain-spacer')[0];
+		spacer = form.getElementsByClassName('sustain-spacer')[0];
 		spacer.style.height = 88 - (88*value) + 'px';
 	}
 
@@ -175,12 +312,31 @@ function inputChange(e){
 	}
 }
 
+function inputChange(e){
+	harmonic = parseInt(this.id.substring(1));
+	value = parseFloat(e.target.value);
+	updateCSS('input[type="range"]:focus::-webkit-slider-thumb::after', 'content', value);
+
+	change(this, e.target);
+
+	document.getElementById('preset').options.selectedIndex = -1;
+	document.getElementById('save').style.display = 'inline-block';
+}
+
 function initUI(){
-	initEnvelopes();
-	forms = document.getElementsByClassName('harmonic_settings');
+	var forms = document.getElementsByClassName('harmonic_settings');
 	for (i=0;i<forms.length;i++){
 		forms[i].addEventListener('input', inputChange);
 	}
+	updateEnvelopeUI();
+
+	var tabs = document.getElementsByClassName('harmonics_tab');
+	for (i=0;i<tabs.length;i++){
+		tabs[i].addEventListener('click', show_harmonics);
+	}
+
+	var save_form = document.getElementById('save').form;
+	save_form.addEventListener('submit', savePreset);
 }
 
 function initSynth() {
@@ -195,6 +351,8 @@ function initSynth() {
 	output = audioContext.createGain();
 	output.connect(audioContext.destination);
 
+	initPresets();
+	envelopes = presets['sine'];
 	initUI();
 }
 

@@ -11,6 +11,14 @@ input[type='range'] {
     background-size: 100% 4px;
     background-repeat: no-repeat;
     overflow: hidden;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+input[type='range']:active {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
 }
 
 

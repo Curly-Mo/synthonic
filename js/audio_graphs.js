@@ -215,7 +215,7 @@ function update_graph_heights(){
   percent = 100/num_plots;
    wrappers = document.getElementsByClassName('plot_wrapper');
    for(var i=0; i<wrappers.length; i++) {
-      wrappers[i].style.height = 'calc('+percent+'% - ' + 15+ 'px)';
+      wrappers[i].style.height = 'calc('+percent+'vh - ' + 15+ 'vh)';
    }
 
    for(var i=0; i<graphs.length; i++) {
@@ -232,6 +232,7 @@ function remove_parent(e){
    this.parentNode.remove();
    num_plots -= 1;
    update_graph_heights();
+   scriptProcs[this.value].onaudioprocess = null;
 }
 
 document.addEventListener("DOMContentLoaded", function() {

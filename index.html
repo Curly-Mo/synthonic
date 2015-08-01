@@ -14,8 +14,27 @@
         <div class='container'>
             <div id='left_pane'>
                 <div id='form-div'>
+                    <form class='settings_form'>
+                        <label for='preset'>Preset:</label>
+                        <select id='preset'></select>
+                        <button id='save' style='display:none;'>Save</button>
+                        <div id='MIDIPlugin'>
+                            <label for='midiIn'>Midi-Input:</label>
+                            <select id='midiIn'>
+                                <option>No devices</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <ul id="tab-nav">
+                    <li class='harmonics_tab current'>0-4</li>
+                    <li class='harmonics_tab'>5-9</li>
+                    <li class='harmonics_tab'>10-14</li>
+                    <li class='harmonics_tab'>15-19</li>
+                </ul>
+                <div id='form-div'>
                     <form id='f0' class='harmonic_settings'>
-                        <header>F0: Fundamental</header>
+                        <header class='harmonic_header'>F0: Fundamental</header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
@@ -67,7 +86,7 @@
                         </div>
                     </form>
                     <form id='f1' class='harmonic_settings'>
-                        <header>F0: Fundamental</header>
+                        <header class='harmonic_header'>F1: Octave</header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
@@ -119,7 +138,7 @@
                         </div>
                     </form>
                     <form id='f2' class='harmonic_settings'>
-                        <header>F0: Fundamental</header>
+                        <header class='harmonic_header'>F2: Fifth</header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
@@ -171,7 +190,839 @@
                         </div>
                     </form>
                     <form id='f3' class='harmonic_settings'>
-                        <header>F0: Fundamental</header>
+                        <header class='harmonic_header'>F3: Octave</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f4' class='harmonic_settings'>
+                        <header class='harmonic_header'>F4: Third</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f5' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F5: Fifth</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f6' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F6: </header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f7' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F7: Octave</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f8' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F8:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f9' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F9: Fundamental</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f10' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F10:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f11' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F11:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f12' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F12:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f13' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F13: Fundamental</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f14' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F14:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f15' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F15:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f16' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F16:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f17' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F17:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f18' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F18:</header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div class='envelope'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='attack9' type='range' min='0' max='1' step='0.01'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <div class='sustain-line'></div>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div class='envelope'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release1' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release2' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release3' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release4' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release5' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release6' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release7' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release8' type='range' min='0' max='1' step='0.01'>
+                                    <input name='release9' type='range' min='0' max='1' step='0.01' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>s
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>s
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id='f19' class='harmonic_settings' style='display:none;'>
+                        <header class='harmonic_header'>F19:</header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
@@ -227,23 +1078,23 @@
             </div>
 
             <div id='right_pane'>
-                <div id='canvas_wrapper'>
+                <!-- <div id='canvas_wrapper'> -->
                     <div class='plot_wrapper'>
                         <span style='position: absolute;'>Oscilloscope</span>
-                        <button class='remove_button'>X</button>
+                        <button class='remove_button' value='oscilloscope'>X</button>
                         <canvas id='oscilloscope'></canvas>
                     </div>
                     <div class='plot_wrapper'>
                         <span class='plot_label'>Spectrum</span>
-                        <button class='remove_button'>X</button>
+                        <button class='remove_button' value='spectrum'>X</button>
                         <canvas id='spectrum'></canvas>
                     </div>
                     <div class='plot_wrapper'>
                         <span class='plot_label'>Spectrogram</span>
-                        <button class='remove_button'>X</button>
+                        <button class='remove_button' value='spectrogram'>X</button>
                         <canvas id='spectrogram'></canvas>
                     </div>
-                </div>
+                <!-- </div> -->
 
                 <div id='keys_wrapper'>
                     <div id='keybox' touch-action='none'>
@@ -257,10 +1108,6 @@
 
             </div>
 
-        </div>
-
-        <div id='MIDIPlugin'>
-            <select id='midiIn'></>
         </div>
 
     </body>
