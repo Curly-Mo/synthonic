@@ -1,8 +1,6 @@
 var audioContext;
 var graph_in;
 var analyser;
-var analyser2;
-
 
 var graphs = ['spectrum', 'spectrogram', 'oscilloscope', 'waveform', 'cepstrum'];
 var canvasCtx = {};
@@ -31,14 +29,14 @@ function init() {
         graph_in = audioContext.createGain();
 
         analyser = audioContext.createAnalyser();
-        analyser.smoothingTimeConstant = 0.3;
-        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0;
+        // Safari doesn't support higher fftSize
+        if (navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') <= -1){
+            analyser.fftSize = 2048;
+        }else{
+            analyser.fftSize = 4096;
+        }
         graph_in.connect(analyser);
-
-        analyser2 = audioContext.createAnalyser();
-        analyser2.smoothingTimeConstant = 0;
-        analyser2.fftSize = 2048;
-        graph_in.connect(analyser2);
 
         initCanvas();
     }
@@ -55,7 +53,7 @@ function initCanvas() {
       'spectrogram': drawSpectrogram,
       'oscilloscope': drawOscilloscope,
       'waveform': drawWaveform,
-      'cepstrum': drawCepstrum,
+      'cepstrum': drawCepstrum
     }
     for (var i = 0; i < graphs.length; i++) {
         graph = graphs[i];
@@ -65,7 +63,12 @@ function initCanvas() {
           canvas.width = canvas.offsetWidth;
           canvas.height = canvas.offsetHeight;
 
-          scriptProcs[graph] = audioContext.createScriptProcessor(512);
+          //Safari requires a bufferSize
+          if (navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') <= -1){
+              scriptProcs[graph] = audioContext.createScriptProcessor(1024);
+          }else{
+              scriptProcs[graph] = audioContext.createScriptProcessor(1024);
+          }
           scriptProcs[graph].connect(audioContext.destination);
           analyser.connect(scriptProcs[graph]);
           scriptProcs[graph].onaudioprocess = scripts[graph];
@@ -90,17 +93,32 @@ function drawOscilloscope() {
     if (!document.getElementById("oscilloscope")){
         return;
     }
-    var array = new Uint8Array(analyser2.frequencyBinCount);
-    analyser2.getByteTimeDomainData(array);
+    var array = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteTimeDomainData(array);
     var canvas = canvasCtx['oscilloscope'].canvas;
     canvasCtx['oscilloscope'].clearRect(0,0,canvas.width,canvas.height);
 
-    binWidth = (canvas.width)/(analyser2.frequencyBinCount-1);
+    binWidth = (canvas.width)/(analyser.frequencyBinCount-1);
     canvasCtx['oscilloscope'].lineWidth = 3;
     canvasCtx['oscilloscope'].strokeStyle = 'rgb(255, 255, 255)';
     canvasCtx['oscilloscope'].beginPath();
+
+    // var max = 0.0;
+    // for (var i = 0; i < array.length; i++) {
+    //     var value = array[i] - 128;
+    //     if (Math.abs(value) > max) {
+    //         max = value;
+    //     }
+    // }
+
     for (var i = 0; i < array.length; i++) {
-            var value = array[i] / 256;
+            // var value;
+            // if (max!=0){
+            //     value = ((array[i]-128)*0.05/max) + 0.5;
+            // }else{
+            //     value = 0.5;
+            // }
+            var value = array[i]/256;
             x = i*binWidth;
             y = value * canvas.height;
             if(i === 0) {
@@ -114,8 +132,8 @@ function drawOscilloscope() {
 };
 
 function drawWaveform() {
-    var array = new Uint8Array(analyser2.frequencyBinCount);
-    analyser2.getByteTimeDomainData(array);
+    var array = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteTimeDomainData(array);
     var canvas = canvasCtx['waveform'].canvas;
 
     totalSamples = 999999;
@@ -150,7 +168,7 @@ function drawSpectrum() {
     var binWidth = canvasCtx['spectrum'].canvas.width/analyser.frequencyBinCount;
     for ( var i = 0; i < (array.length); i++ ){
         var value = canvasCtx['spectrum'].canvas.height*array[i]/256;
-        canvasCtx['spectrum'].fillRect(i*binWidth,canvasCtx['spectrum'].canvas.height,binWidth*3/4,-value);
+        canvasCtx['spectrum'].fillRect(i*binWidth,canvasCtx['spectrum'].canvas.height,binWidth,-value);
     }
 };
 
@@ -159,14 +177,14 @@ function drawSpectrogram() {
     canvas = canvasCtx['spectrogram'].canvas;
     tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
 
-    var array = new Uint8Array(analyser2.frequencyBinCount);
-    analyser2.getByteFrequencyData(array);
+    var array = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(array);
 
     audioDuration = 1;
     totalSamples = 999999;
     timeBinWidth = canvas.width/(totalSamples/scriptProcs['spectrogram'].bufferSize);
     timeBinWidth = Math.max(timeBinWidth, 1);
-    freqBinWidth = canvas.height/analyser2.frequencyBinCount;
+    freqBinWidth = canvas.height/analyser.frequencyBinCount;
 
     for (var i = 0; i < array.length; i++) {
             var value = array[i];
@@ -198,7 +216,7 @@ function drawCepstrum() {
     for ( var i = 1; i < (mag_array.length/2); i++ ){
         var value = 20 * Math.log(mag_array[i]) / Math.LN10;
 
-        canvasCtx['cepstrum'].fillRect((i-1)*binWidth,canvasCtx['cepstrum'].canvas.height,binWidth*3/4,-value);
+        canvasCtx['cepstrum'].fillRect((i-1)*binWidth,canvasCtx['cepstrum'].canvas.height,binWidth,-value);
     }
 };
 
@@ -212,10 +230,10 @@ function make_gradient(ctx){
 }
 
 function update_graph_heights(){
-  percent = 100/num_plots;
+   percent = 55/num_plots;
    wrappers = document.getElementsByClassName('plot_wrapper');
    for(var i=0; i<wrappers.length; i++) {
-      wrappers[i].style.height = 'calc('+percent+'vh - ' + 15+ 'vh)';
+      wrappers[i].style.height = percent + 'vh';
    }
 
    for(var i=0; i<graphs.length; i++) {
