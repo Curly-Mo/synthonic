@@ -86,6 +86,8 @@ function keyUp( ev ) {
 	return false;
 }
 var pointers=[];
+var touchX;
+var touchY;
 
 function touchstart( ev ) {
 	for (var i=0; i<ev.targetTouches.length; i++) {
@@ -93,10 +95,9 @@ function touchstart( ev ) {
 		var element = touch.target;
 
 		var note = parseInt( element.id.substring( 1 ) );
-		console.log( "touchstart: id: " + element.id + "identifier: " + touch.identifier + " note:" + note );
+		//console.log( "touchstart: id: " + element.id + "identifier: " + touch.identifier + " note:" + note );
 		if (!isNaN(note)) {
 			noteOn( note + 12*(3-currentOctave), 0.75 );
-			var keybox = document.getElementById("keybox")
 			pointers[touch.identifier]=note;
 		}
 	}
@@ -107,31 +108,41 @@ function touchmove( ev ) {
 	for (var i=0; i<ev.targetTouches.length; i++) {
 	    var touch = ev.targetTouches[0];
 		var element = touch.target;
+		touchX = touch.clientX;
+		touchY = touch.clientY;
+		var actual_element = document.elementFromPoint(touch.clientX, touch.clientY);
+		var note = parseInt( actual_element.id.substring( 1 ) );
 
-		var note = parseInt( element.id.substring( 1 ) );
-		console.log( "touchmove: id: " + element.id + "identifier: " + touch.identifier + " note:" + note );
+		if (element != actual_element) {
+			stopNote(element.id.substring(1), ev.pointerId);
+		}
+
+		//console.log( "touchmove: id: " + element.id + "identifier: " + touch.identifier + " note:" + note );
 		if (!isNaN(note) && pointers[touch.identifier] && pointers[touch.identifier]!=note) {
 			noteOff(pointers[touch.identifier] + 12*(3-currentOctave));
 			noteOn( note + 12*(3-currentOctave), 0.75 );
-			var keybox = document.getElementById("keybox")
 			pointers[touch.identifier]=note;
 		}
 	}
 	ev.preventDefault();
 }
 
-function touchend( ev ) {
-	var note = parseInt( ev.target.id.substring( 1 ) );
-	console.log( "touchend: id: " + ev.target.id + " note:" + note );
+function stopNote(note, pointerId) {
 	if (note != NaN)
 		noteOff( note + 12*(3-currentOctave) );
-	pointers[ev.pointerId]=null;
-	var keybox = document.getElementById("keybox")
+	pointers[pointerId]=null;
+}
+
+function touchend( ev ) {
+	var actual_element = document.elementFromPoint(touchX, touchY);
+	var note = parseInt( actual_element.id.substring( 1 ) );
+	//console.log( "touchend: id: " + ev.target.id + " note:" + note );
+	stopNote(note, ev.pointerId);
 	ev.preventDefault();
 }
 
 function touchcancel( ev ) {
-	console.log( "touchcancel" );
+	//console.log( "touchcancel" );
 	ev.preventDefault();
 }
 
@@ -142,7 +153,6 @@ function pointerDown( ev ) {
 	//		+ " target: " + ev.target.id + " note:" + note );
 	if (!isNaN(note)) {
 		noteOn( note + 12*(3-currentOctave), 0.75 );
-		var keybox = document.getElementById("keybox")
 		pointers[ev.pointerId]=note;
 	}
 	ev.preventDefault();
@@ -169,19 +179,32 @@ function pointerUp( ev ) {
 	if (note != NaN)
 		noteOff( note + 12*(3-currentOctave) );
 	pointers[ev.pointerId]=null;
-	var keybox = document.getElementById("keybox")
 	ev.preventDefault();
 }
 
 function initKeyboard(){
-  keybox = document.getElementById("keybox");
+  	keybox = document.getElementById("keybox");
 
-  keybox.addEventListener('mousedown', pointerDown);
-  keybox.addEventListener('mousemove', pointerMove);
-  keybox.addEventListener('mouseup', pointerUp);
 
-  window.addEventListener('keydown', keyDown, false);
-  window.addEventListener('keyup', keyUp, false);
+  	if ('onpointerdown' in window) {
+	  	keybox.addEventListener('pointerdown', pointerDown);
+	  	keybox.addEventListener('pointermove', pointerMove);
+	  	keybox.addEventListener('pointerup', pointerUp);
+  	}else {
+    	if ('ontouchstart' in window) {
+			keybox.addEventListener('touchstart', touchstart);
+			keybox.addEventListener('touchmove', touchmove);
+			keybox.addEventListener('touchend', touchend);
+			//keybox.addEventListener('touchcancel', touchcancel);
+    	}else{
+			keybox.addEventListener('mousedown', pointerDown);
+			keybox.addEventListener('mousemove', pointerMove);
+			keybox.addEventListener('mouseup', pointerUp);
+		}
+	}
+
+	window.addEventListener('keydown', keyDown, false);
+	window.addEventListener('keyup', keyUp, false);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
