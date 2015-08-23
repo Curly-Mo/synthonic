@@ -36,17 +36,21 @@
                     <li class='harmonics_tab'>15-19</li>
                     <li class='harmonics_tab'>20-24</li>
                     <li class='harmonics_tab'>25-29</li>
+                    <li class='harmonics_tab'>noise</li>
                 </ul>
                 <div class='form-div'>
-                    <form id='f0' class='harmonic_settings'>
+                    <form id='f0' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='0'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='1' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -73,9 +77,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -99,30 +105,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f1' class='harmonic_settings'>
+                    <form id='f1' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='1'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='2' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -149,9 +158,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -175,30 +186,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f2' class='harmonic_settings'>
+                    <form id='f2' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='2'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='3' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -225,9 +239,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -251,30 +267,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f3' class='harmonic_settings'>
+                    <form id='f3' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='3'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='4' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -301,9 +320,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -327,30 +348,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f4' class='harmonic_settings'>
+                    <form id='f4' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='4'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='5' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -377,9 +401,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -403,30 +429,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f5' class='harmonic_settings' style='display:none;'>
+                    <form id='f5' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='5' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='6' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -453,9 +482,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -479,30 +510,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f6' class='harmonic_settings' style='display:none;'>
+                    <form id='f6' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='6' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='7' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -529,9 +563,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -555,30 +591,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f7' class='harmonic_settings' style='display:none;'>
+                    <form id='f7' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='7' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='8' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -605,9 +644,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -631,30 +672,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f8' class='harmonic_settings' style='display:none;'>
+                    <form id='f8' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='8' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='9' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -681,9 +725,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -707,30 +753,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f9' class='harmonic_settings' style='display:none;'>
+                    <form id='f9' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='9' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='10' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -757,9 +806,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -783,30 +834,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f10' class='harmonic_settings' style='display:none;'>
+                    <form id='f10' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='10' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='11' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -833,9 +887,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -859,30 +915,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f11' class='harmonic_settings' style='display:none;'>
+                    <form id='f11' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='11' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='12' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -909,9 +968,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -935,30 +996,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f12' class='harmonic_settings' style='display:none;'>
+                    <form id='f12' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='12' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='13' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -985,9 +1049,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1011,30 +1077,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f13' class='harmonic_settings' style='display:none;'>
+                    <form id='f13' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='13' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='14' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1061,9 +1130,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1087,30 +1158,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f14' class='harmonic_settings' style='display:none;'>
+                    <form id='f14' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='14' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='15' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1137,9 +1211,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1163,30 +1239,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f15' class='harmonic_settings' style='display:none;'>
+                    <form id='f15' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='15' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='16' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1213,9 +1292,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1239,30 +1320,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f16' class='harmonic_settings' style='display:none;'>
+                    <form id='f16' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='16' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='17' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1289,9 +1373,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1315,30 +1401,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f17' class='harmonic_settings' style='display:none;'>
+                    <form id='f17' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='17' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='18' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1365,9 +1454,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1391,30 +1482,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f18' class='harmonic_settings' style='display:none;'>
+                    <form id='f18' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='18' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='19' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1441,9 +1535,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1467,30 +1563,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f19' class='harmonic_settings' style='display:none;'>
+                    <form id='f19' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='19' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='20' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1517,9 +1616,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1543,30 +1644,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f20' class='harmonic_settings' style='display:none;'>
+                    <form id='f20' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='20' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='21' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1593,9 +1697,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1619,30 +1725,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f21' class='harmonic_settings' style='display:none;'>
+                    <form id='f21' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='21' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='22' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1669,9 +1778,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1695,30 +1806,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f22' class='harmonic_settings' style='display:none;'>
+                    <form id='f22' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='22' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='23' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1745,9 +1859,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1771,30 +1887,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f23' class='harmonic_settings' style='display:none;'>
+                    <form id='f23' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='23' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='24' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1821,9 +1940,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1847,30 +1968,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f24' class='harmonic_settings' style='display:none;'>
+                    <form id='f24' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='24' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='25' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1897,9 +2021,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1923,30 +2049,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f25' class='harmonic_settings' style='display:none;'>
+                    <form id='f25' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='25' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='26' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -1973,9 +2102,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -1999,30 +2130,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f26' class='harmonic_settings' style='display:none;'>
+                    <form id='f26' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='26' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='27' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -2049,9 +2183,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -2075,30 +2211,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f27' class='harmonic_settings' style='display:none;'>
+                    <form id='f27' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='27' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='28' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -2125,9 +2264,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -2151,30 +2292,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f28' class='harmonic_settings' style='display:none;'>
+                    <form id='f28' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='28' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='29' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -2201,9 +2345,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -2227,30 +2373,33 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
-                    <form id='f29' class='harmonic_settings' style='display:none;'>
+                    <form id='f29' class='harmonic_settings harmonics' data-type='harmonics' data-harmonic='29' style='display:none;'>
                         <header class='harmonic_header'>F<input name='harmonic_number' type='number' value='30' min='0' max='500' step='0.01' class='harmonic_number'></header>
                         <div class='envelope_wrapper'>
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Attack Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='attack_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='attack_env' type='button'>zero</button>
                                 </div>
-                                <div class='envelope'>
+                                <div class='envelope' data-property='attack_env'>
                                     <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
                                     <input name='attack1' type='range' min='0' max='1' step='0.001'>
                                     <input name='attack2' type='range' min='0' max='1' step='0.001'>
@@ -2277,9 +2426,11 @@
                             <div style='width:35%;'>
                                 <div class='envelope_label'>Release Envelope</div>
                                 <div>
-                                    <button class='env_shaper' value='linear' data-property='release_env' type='button'>linear</button><button class='env_shaper' value='log' data-property='release_env' type='button'>log</button>
-                                </div>
-                                <div class='envelope'>
+                                    <button class='env_shaper' value='linear' data-type='harmonics' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='harmonics' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='harmonics' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='harmonics' data-property='release_env' type='button'>zero</button>                                </div>
+                                <div class='envelope' data-property='release_env'>
                                     <input name='release0' type='range' min='0' max='1' step='0.001'>
                                     <input name='release1' type='range' min='0' max='1' step='0.001'>
                                     <input name='release2' type='range' min='0' max='1' step='0.001'>
@@ -2303,21 +2454,155 @@
                             <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
                             <div class='optional_property'>
                                 <label for='amplitude>'>amplitude:</label>
-                                <input name='amplitude' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                         <div>
                             <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
                             <div class='optional_property'>
                                 <label for='amplitude'>amplitude:</label>
-                                <input name='amplitude' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='amplitude' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                                 <label for='frequency>'>frequency:</label>
-                                <input name='frequency' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <input name='frequency' data-type='harmonics' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
                             </div>
                         </div>
                     </form>
+
+                    <form id='noise' class='harmonic_settings noises' data-type='noises' data-harmonic='0' style='display:none;'>
+                        <header class='harmonic_header'><input name='harmonic_number' type=text value='Noise' class='harmonic_number' disabled='disabled'></header>
+                        <div class='envelope_wrapper'>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Attack Envelope</div>
+                                <div>
+                                    <button class='env_shaper' value='linear' data-type='noises' data-property='attack_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='noises' data-property='attack_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='noises' data-property='attack_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='noises' data-property='attack_env' type='button'>zero</button>
+                                </div>
+                                <div class='envelope' data-property='attack_env'>
+                                    <input name='attack0' type='range' min='0' max='1' step='0.001' value='0' disabled>
+                                    <input name='attack1' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack2' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack3' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack4' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack5' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack6' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack7' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack8' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='attack9' type='range' min='0' max='1' step='0.001' value='0' >
+                                </div>
+                                <div class='start_time'>
+                                    <input name='attack_start' type='text' value='0' disabled></input>
+                                </div>
+                                <div class='end_time'>
+                                    <input name='attack_time' type='number' value='1.0' min='0.0' step='0.05'></input>
+                                </div>
+                            </div>
+                            <div style='width:30%;'>
+                                <div class='envelope_label'>Sustain</div>
+                                <div class='sustain-spacer'></div>
+                                <canvas class='sustain-line'></canvas>
+                            </div>
+                            <div style='width:35%;'>
+                                <div class='envelope_label'>Release Envelope</div>
+                                <div>
+                                    <button class='env_shaper' value='linear' data-type='noises' data-property='release_env' type='button'>linear</button>
+                                    <button class='env_shaper' value='log' data-type='noises' data-property='release_env' type='button'>log</button>
+                                    <button class='env_shaper' value='inv' data-type='noises' data-property='release_env' type='button'>inv</button>
+                                    <button class='env_shaper' value='zero' data-type='noises' data-property='release_env' type='button'>zero</button>
+                                </div>
+                                <div class='envelope' data-property='release_env'>
+                                    <input name='release0' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release1' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release2' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release3' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release4' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release5' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release6' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release7' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release8' type='range' min='0' max='1' step='0.001' value='0' >
+                                    <input name='release9' type='range' min='0' max='1' step='0.001' value='0' disabled>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='release_start' type='text' value='0' disabled></input>
+                                </div>
+                                <div class='end_time'>
+                                    <input name='release_time' type='number' value='1.0' min='0.0' step='0.05'></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='envelope_wrapper'>
+                            <div style='width:95%; margin:0 auto;'>
+                                <div class='envelope_label'>Spectrum</div>
+                                <div>
+                                    <button class='env_shaper' value='white' data-type='noises' data-property='equalizer' type='button'>white</button>
+                                    <button class='env_shaper' value='pink' data-type='noises' data-property='equalizer' type='button'>pink</button>
+                                    <button class='env_shaper' value='brown' data-type='noises' data-property='equalizer' type='button'>brown</button>
+                                    <button class='env_shaper' value='grey' data-type='noises' data-property='equalizer' type='button'>grey</button>
+                                    <button class='env_shaper' value='silence' data-type='noises' data-property='equalizer' type='button'>silence</button>
+                                </div>
+                                <div class='envelope' data-property='equalizer'>
+                                    <input name='spectrum0' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum1' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum2' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum3' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum4' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum5' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum6' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum7' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum8' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum9' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum10' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum11' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum12' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum13' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum14' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum15' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum16' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum17' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum18' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum19' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum20' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum21' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum22' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum23' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum24' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum25' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum26' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum27' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum28' type='range' min='-40' max='40' step='0.1' value='0'>
+                                    <input name='spectrum29' type='range' min='-40' max='40' step='0.1' value='0'>
+                                </div>
+                                <div class='start_time'>
+                                    <input name='spectrum_start' type='text' value='0 Hz' disabled></input>
+                                </div>
+                                <div class='end_time'>
+                                    <input name='spectrum_end' type='text' value='22 kHz' disabled></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label><input class='checkbox' name='tremolo' type='checkbox' value='tremolo'></input>tremolo</label>
+                            <div class='optional_property'>
+                                <label for='amplitude>'>amplitude:</label>
+                                <input name='amplitude' data-type='noises' data-property='tremolo' type='number' min='0' max='1' step='0.01' value='0'></input>
+                                <label for='frequency>'>frequency:</label>
+                                <input name='frequency' data-type='noises' data-property='tremolo' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                            </div>
+                        </div>
+                        <div>
+                            <label><input class='checkbox' name='vibrato' type='checkbox'></input>vibrato</label>
+                            <div class='optional_property'>
+                                <label for='amplitude'>amplitude:</label>
+                                <input name='amplitude' data-type='noises' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                                <label for='frequency>'>frequency:</label>
+                                <input name='frequency' data-type='noises' data-property='vibrato' type='number' min='0' max='20000' step='0.1' value='0'></input>
+                            </div>
+                        </div>
+                    </form>
+
 
                 </div>
             </div>

@@ -33,7 +33,7 @@ body{
 .tab-nav li{
   background-color: #000;
   border-bottom: 0;
-  padding: 5px 10px;
+  padding: 5px 6px;
   margin: 0;
   margin-right: 3px;
   background:rgb(72,72,72);
@@ -260,4 +260,16 @@ input[type=number]{
 .optional_property {
     text-align: center;
     display: none;
+}
+
+.env_shaper {
+    margin: 0 -1px 0 -1px;
+    padding: 2px 2px 2px 2px;
+    font-size: 10px;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    margin: 0 -3px 0 -3px;
+    border: 0;
 }

@@ -136,7 +136,6 @@ function touchcancel( ev ) {
 }
 
 function pointerDown( ev ) {
-	console.log(ev);
 	var note = parseInt( ev.target.id.substring( 1 ) );
 	//if (pointerDebugging)
 	//	console.log( "pointer down: id: " + ev.pointerId
