@@ -273,3 +273,10 @@ button::-moz-focus-inner {
     margin: 0 -3px 0 -3px;
     border: 0;
 }
+
+.github-fork-ribbon {
+}
+.github-fork-ribbon-wrapper.right-bottom {
+  bottom: -15px;
+  right: -15px;
+}
